@@ -1,0 +1,10 @@
+#! /usr/bin/expect
+
+set timeout 5
+spawn telnet 127.0.0.1 8081
+
+expect "Please enter password:"
+send "CHANGEME\r"
+
+expect "Press 'help'"
+send "shutdown\r"

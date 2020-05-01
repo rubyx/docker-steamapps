@@ -3,6 +3,8 @@ FROM cm2network/steamcmd:root
 ARG STEAM_APP_ID
 ARG STEAM_APP_DIR
 
+RUN apt update && apt upgrade -y && apt install -y telnet expect
+
 USER steam
 WORKDIR /home/steam
 

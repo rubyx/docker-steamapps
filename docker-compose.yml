@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        STEAM_APP_ID: 294420
+        STEAM_APP_DIR: /home/steam/7dtd
+    ports:
+      - "127.0.0.1:8081:8081"
+      - "0.0.0.0:26900-26902:26900-26902"
+    volumes:
+      - "./configs:/home/steam/7dtd/configs"
+      - "./scripts:/home/steam/7dtd/scripts"
+      - "./saves:/home/steam/7dtd_SaveData"
+      - "./data:/home/steam/7dtd_UserData"
+      - "./logs:/home/steam/7dtd_Logs"
+    user: steam
+    environment:
+      SERVER_CONFIG: "default"
+    command: [ "/home/steam/7dtd/scripts/startup.sh" ]
