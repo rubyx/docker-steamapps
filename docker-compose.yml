@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        STEAM_APP_ID: 896660
+        STEAM_APP_DIR: /home/steam/valheim
+    ports:
+      - "0.0.0.0:2456-2458:2456-2458/udp"
+    volumes:
+      - "./config:/home/steam/.config/unity3d/IronGate/Valheim"
+      - "./scripts:/home/steam/scripts"
+    environment:
+      SERVER_NAME: "ServerName"
+      SERVER_WORLD: "WorldName"
+      SERVER_PASSWORD: "changeme"
+    user: steam
+    stop_signal: SIGINT
+    command: [ "/home/steam/scripts/start_server.sh" ]
+
